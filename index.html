@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Shanney.com — Find the Right People</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #0B132B;
+    --bg-center: #1C2541;
+    --ink: #FFFFFF;
+    --card: rgba(28, 37, 65, 0.7);
+    --brass: #38BDF8;
+    --whatsapp-green: #25D366;
+    --line: rgba(255, 255, 255, 0.12);
+    --muted: #94A3B8;
+    --star-gold: #FFD700;
+
+    --gold-color: #FFD700;
+    --silver-color: #E2E8F0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: radial-gradient(circle at 50% 40%, var(--bg-center) 0%, var(--bg-dark) 70%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.5;
+    padding-bottom: 70px;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  header {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    background: rgba(11, 19, 43, 0.85);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+  }
+
+  .logo span {
+    color: var(--brass);
+  }
+
+  nav {
+    display: flex;
+    gap: 16px;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  nav a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .page {
+    display: none;
+  }
+
+  .page.active {
+    display: block;
+  }
+
+  .hero {
+    padding: 28px 0 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.75rem, 6vw, 2.8rem);
+    max-width: 720px;
+    margin: 0 auto 10px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 .accent {
+    position: relative;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--brass);
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .hero h1 .accent svg {
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 10px;
+  }
+
+  .hero p {
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    padding: 0 8px;
+  }
+
+  .categories {
+    padding: 20px 0 28px;
+  }
+
+  .cat-heading {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .cat-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .cat-heading h2 {
+    font-size: 1.5rem;
+  }
+
+  .cat-heading p {
+    color: var(--muted);
+    margin-top: 4px;
+    font-size: 0.88rem;
+  }
+
+  .grid, .pro-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .card {
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--whatsapp-green);
+    box-shadow: 0 8px 20px -5px rgba(37, 211, 102, 0.25);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .card-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--brass);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .go-inside-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .go-inside-btn svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--muted);
+    fill: none;
+    stroke-width: 2.5;
+  }
+
+  .card:hover .go-inside-btn {
+    background: var(--whatsapp-green);
+  }
+
+  .card:hover .go-inside-btn svg {
+    stroke: #ffffff;
+  }
+
+  .card p {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .card .tags, .pro-apps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .card .tags span, .pro-apps span {
+    font-size: 0.68rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 2px 7px;
+    border-radius: 10px;
+    color: #CBD5E1;
+  }
+
+  .pro-apps span {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.3);
+    color: var(--brass);
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--brass);
+    font-weight: 600;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin: 18px 0 16px;
+    transition: all 0.2s ease;
+  }
+
+  .back-btn:hover {
+    background: rgba(56, 189, 248, 0.22);
+    border-color: var(--brass);
+  }
+
+  .pro-card {
+    background: rgba(28, 37, 65, 0.7);
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .pro-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 80px;
+  }
+
+  .tier-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 2;
+  }
+
+  .tier-badge svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .tier-badge.badge-gold {
+    background: rgba(255, 215, 0, 0.18);
+    color: var(--gold-color);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+  }
+  .tier-badge.badge-silver {
+    background: rgba(226, 232, 240, 0.18);
+    color: var(--silver-color);
+    border: 1px solid rgba(226, 232, 240, 0.3);
+  }
+
+  .add-profile-card {
+    border: 2px dashed rgba(56, 189, 248, 0.4);
+    background: rgba(56, 189, 248, 0.05);
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .add-profile-card:hover {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: var(--brass);
+  }
+
+  .add-profile-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--brass);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .add-profile-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(56, 189, 248, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .pro-info h3 {
+    font-size: 1.05rem;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .pro-info .place {
+    color: #E2E8F0;
+    font-size: 0.78rem;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .pro-info .exp {
+    color: var(--brass);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .pro-info .role {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--whatsapp-green);
+    color: #fff;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .home-wa-container {
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .home-wa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--whatsapp-green);
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.25s ease;
+  }
+
+  .home-wa-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+  }
+
+  .creator-section {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--line);
+  }
+
+  .creator-card {
+    background: rgba(11, 19, 43, 0.6);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 14px;
+    padding: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .creator-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(56, 189, 248, 0.1);
+    border: 2px solid var(--brass);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brass);
+    flex-shrink: 0;
+  }
+
+  .creator-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--brass);
+    fill: none;
+    stroke-width: 1.8;
+  }
+
+  .creator-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    text-transform: uppercase;
+    background: rgba(56, 189, 248, 0.12);
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  .creator-details h3 {
+    font-size: 1.15rem;
+    color: #ffffff;
+  }
+
+  .creator-details .creator-location {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .creator-bio {
+    color: #CBD5E1;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin-top: 6px;
+  }
+
+  .creator-ig-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(220, 39, 67, 0.25);
+  }
+
+  .creator-ig-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(220, 39, 67, 0.4);
+  }
+
+  .creator-ig-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+
+  .apps-section {
+    margin-top: 2px;
+  }
+  .apps-section-title {
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+
+  /* DIRECT 5 STAR RATING ONLY */
+  .rating-section {
+    border-top: 1px dashed var(--line);
+    padding-top: 8px;
+    margin-top: 4px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .rating-title {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .rating-stars {
+    color: var(--star-gold);
+    display: flex;
+    gap: 4px;
+  }
+
+  .interactive-stars span {
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #475569;
+    transition: color 0.2s ease, transform 0.1s ease;
+  }
+
+  .interactive-stars span:hover {
+    transform: scale(1.2);
+  }
+
+  .interactive-stars span.active,
+  .interactive-stars span:hover,
+  .interactive-stars span:hover ~ span {
+    color: var(--star-gold);
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(11, 19, 43, 0.85);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+  }
+
+  .modal {
+    background: #1C2541;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal h2 {
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+    color: #fff;
+  }
+
+  .modal-subtitle {
+    font-size: 0.78rem;
+    color: var(--brass);
+    margin-bottom: 14px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    background: rgba(11, 19, 43, 0.6);
+    border: 1px solid var(--line);
+    color: #fff;
+    font-size: 0.85rem;
+    outline: none;
+  }
+
+  .form-group select option {
+    background: #1C2541;
+    color: #fff;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--brass);
+  }
+
+  .tier-rates-box {
+    background: rgba(11, 19, 43, 0.6);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 12px;
+    font-size: 0.78rem;
+  }
+
+  .tier-rates-title {
+    color: var(--brass);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .tier-rate-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+  }
+
+  .price-tag {
+    background: rgba(37, 211, 102, 0.15);
+    border: 1px solid var(--whatsapp-green);
+    color: var(--whatsapp-green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .modal-actions button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+
+  .btn-submit {
+    background: var(--whatsapp-green);
+    color: #fff;
+  }
+
+  .btn-cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--muted);
+  }
+
+  .modal-nav-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .btn-nav {
+    flex: 1;
+    padding: 7px;
+    border-radius: 6px;
+    font-weight: 600;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--brass);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+
+  .btn-nav:hover {
+    background: rgba(56, 189, 248, 0.25);
+  }
+
+  .wa-chat-footer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--whatsapp-green);
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 12px;
+    width: 100%;
+    text-align: center;
+  }
+
+  footer {
+    padding: 20px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--line);
+    margin-top: 32px;
+  }
+
+  @media(min-width: 640px) {
+    .grid, .pro-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .creator-card {
+      flex-direction: row;
+      text-align: left;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo" onclick="showPage('home-page')">Shanney<span>.com</span></div>
+    <nav>
+      <a href="#" onclick="showPage('home-page'); return false;">Services</a>
+      <a href="https://api.whatsapp.com/send?phone=919496806919&text=Hi,%20I%20am%20a%20customer%20of%20yours." target="_blank">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div id="home-page" class="page active">
+  <section class="hero">
+    <div class="wrap">
+      <h1>Hire the <span class="accent">right specialist<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2 9C40 2 160 2 198 9" stroke="#38BDF8" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span>, directly on WhatsApp.</h1>
+      <p>We connect you directly with trusted, vetted specialists via WhatsApp.</p>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div class="wrap">
+      <div class="cat-heading">
+        <div class="cat-eyebrow">What We Offer</div>
+        <h2>Our Services</h2>
+        <p>Select a category to view our team members.</p>
+      </div>
+
+      <div class="grid">
+        <!-- FIRST: EDITORS -->
+        <div class="card" onclick="showPage('editors-page')">
+          <div class="card-header">
+            <div class="card-header-left">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </div>
+              <h3>Editors</h3>
+            </div>
+            <div class="go-inside-btn">
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+          <p>Professional video and photo editing using CapCut, DaVinci Resolve, After Effects, and Lightroom.</p>
+          <div class="tags"><span>Video Editing</span><span>Photo Editing</span><span>Effects</span></div>
+        </div>
+
+        <!-- SECOND: PHOTOGRAPHY / VIDEOGRAPHY -->
+        <div class="card" onclick="showPage('photo-video-page')">
+          <div class="card-header">
+            <div class="card-header-left">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              </div>
+              <h3>Photography/Videography</h3>
+            </div>
+            <div class="go-inside-btn">
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+          <p>Event coverage, portrait sessions, commercial shoots, cinematics, and professional media production.</p>
+          <div class="tags"><span>Photography</span><span>Videography</span><span>Cinematography</span></div>
+        </div>
+
+        <!-- THIRD: TECHNICAL SUPPORT -->
+        <div class="card" onclick="showPage('tech-page')">
+          <div class="card-header">
+            <div class="card-header-left">
+              <div class="icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <h3>Technical Support</h3>
+            </div>
+            <div class="go-inside-btn">
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+          <p>Troubleshooting, system setup, hardware fixes, and software assistance for personal and business devices.</p>
+          <div class="tags"><span>Troubleshooting</span><span>Setup</span><span>Software Fixes</span></div>
+        </div>
+      </div>
+
+      <div class="home-wa-container">
+        <a href="https://api.whatsapp.com/send?phone=919496806919&text=Hi,%20I%20have%20an%20inquiry%20from%20the%20home%20page." target="_blank" class="home-wa-btn">
+          💬 WhatsApp Chat Us
+        </a>
+      </div>
+
+      <div class="creator-section">
+        <div class="creator-card">
+          <div class="creator-icon">
+            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="creator-details">
+            <div class="creator-badge">Website Creator</div>
+            <h3>Muhammed Shan Mk</h3>
+            <div class="creator-location">📍 Nellipramba</div>
+            <p class="creator-bio">
+              Designed & developed by Muhammed Shan Mk. Crafting fast, modern, and high-performance digital solutions tailored to local businesses and professionals.
+            </p>
+            <a href="https://www.instagram.com/shanney___/" target="_blank" class="creator-ig-btn">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              Follow @shanney___
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- PAGE 1: EDITORS -->
+<div id="editors-page" class="page">
+  <div class="wrap">
+    <button class="back-btn" onclick="showPage('home-page')">← Back to Services</button>
+    <section class="hero">
+      <h1>Editors Team</h1>
+      <p>Connect directly with our professional editors on WhatsApp.</p>
+    </section>
+
+    <div class="pro-grid" id="editors-grid">
+      <div class="pro-card add-profile-card" onclick="openModal('editors-grid', 'Editing')">
+        <div class="add-profile-content">
+          <div class="add-profile-icon">+</div>
+          <span>Add Profile (Tier Pricing)</span>
+        </div>
+      </div>
+
+      <div class="pro-card" data-person-id="shan-editor">
+        <div class="tier-badge badge-gold">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
+          Gold
+        </div>
+        <div class="pro-card-header">
+          <div class="pro-info">
+            <h3>ADMIN</h3>
+            <div class="place">📍 Taliparamba</div>
+            <div class="role">Video Editor</div>
+            <div class="exp">1 Years Experience</div>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=919496806919&text=Hi%20Shan,%20I%20want%20to%20hire%20you%20for%20Video%20Editing" class="wa-btn" target="_blank">Chat</a>
+        </div>
+        
+        <div class="apps-section">
+          <div class="apps-section-title">Software / Apps</div>
+          <div class="pro-apps">
+            <span>CapCut</span>
+          </div>
+        </div>
+
+        <div class="rating-section">
+          <span class="rating-title">Rate Profile:</span>
+          <div class="rating-stars interactive-stars" id="stars-shan-editor">
+            <span onclick="setRating('shan-editor', 1)">★</span>
+            <span onclick="setRating('shan-editor', 2)">★</span>
+            <span onclick="setRating('shan-editor', 3)">★</span>
+            <span onclick="setRating('shan-editor', 4)">★</span>
+            <span onclick="setRating('shan-editor', 5)">★</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pro-card" data-person-id="hemin-editor">
+        <div class="tier-badge badge-silver">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>
+          Silver
+        </div>
+        <div class="pro-card-header">
+          <div class="pro-info">
+            <h3>Hemin</h3>
+            <div class="place">📍 Taliparamba</div>
+            <div class="role">Video & Photo Editor</div>
+            <div class="exp">1 Years Experience</div>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=919496806919&text=Hi%20Hemin,%20I%20want%20to%20hire%20you%20for%20Video%20and%20Photo%20Editing" class="wa-btn" target="_blank">Chat</a>
+        </div>
+        
+        <div class="apps-section">
+          <div class="apps-section-title">Software / Apps</div>
+          <div class="pro-apps">
+            <span>CapCut</span>
+            <span>DaVinci Resolve</span>
+          </div>
+        </div>
+
+        <div class="rating-section">
+          <span class="rating-title">Rate Profile:</span>
+          <div class="rating-stars interactive-stars" id="stars-hemin-editor">
+            <span onclick="setRating('hemin-editor', 1)">★</span>
+            <span onclick="setRating('hemin-editor', 2)">★</span>
+            <span onclick="setRating('hemin-editor', 3)">★</span>
+            <span onclick="setRating('hemin-editor', 4)">★</span>
+            <span onclick="setRating('hemin-editor', 5)">★</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: PHOTOGRAPHY & VIDEOGRAPHY -->
+<div id="photo-video-page" class="page">
+  <div class="wrap">
+    <button class="back-btn" onclick="showPage('home-page')">← Back to Services</button>
+    <section class="hero">
+      <h1>Photography & Videography Team</h1>
+      <p>Connect directly with our professional photographers & videographers on WhatsApp.</p>
+    </section>
+
+    <div class="pro-grid" id="photo-video-grid">
+      <div class="pro-card add-profile-card" onclick="openModal('photo-video-grid', 'Photography/Videography')">
+        <div class="add-profile-content">
+          <div class="add-profile-icon">+</div>
+          <span>Add Profile (Tier Pricing)</span>
+        </div>
+      </div>
+
+      <div class="pro-card" data-person-id="shan-photo">
+        <div class="tier-badge badge-gold">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
+          Gold
+        </div>
+        <div class="pro-card-header">
+          <div class="pro-info">
+            <h3>ADMIN</h3>
+            <div class="place">📍 Taliparamba</div>
+            <div class="role">Videographer</div>
+            <div class="exp">1 Years Experience</div>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=919496806919&text=Hi%20Shan,%20I%20want%20to%20hire%20you%20for%20Photography/Videography" class="wa-btn" target="_blank">Chat</a>
+        </div>
+
+        <div class="apps-section">
+          <div class="apps-section-title">Equipment / Tools</div>
+          <div class="pro-apps">
+            <span>iPhone</span>
+          </div>
+        </div>
+
+        <div class="rating-section">
+          <span class="rating-title">Rate Profile:</span>
+          <div class="rating-stars interactive-stars" id="stars-shan-photo">
+            <span onclick="setRating('shan-photo', 1)">★</span>
+            <span onclick="setRating('shan-photo', 2)">★</span>
+            <span onclick="setRating('shan-photo', 3)">★</span>
+            <span onclick="setRating('shan-photo', 4)">★</span>
+            <span onclick="setRating('shan-photo', 5)">★</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pro-card" data-person-id="hemin-photo">
+        <div class="tier-badge badge-silver">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>
+          Silver
+        </div>
+        <div class="pro-card-header">
+          <div class="pro-info">
+            <h3>Hemin Ali</h3>
+            <div class="place">📍 Taliparamba</div>
+            <div class="role">Photographer & Videographer</div>
+            <div class="exp">1 Years Experience</div>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=919496806919&text=Hi%20Hemin%20Ali,%20I%20want%20to%20hire%20you%20for%20Photography/Videography" class="wa-btn" target="_blank">Chat</a>
+        </div>
+
+        <div class="apps-section">
+          <div class="apps-section-title">Equipment / Tools</div>
+          <div class="pro-apps">
+            <span>Camera</span>
+            <span>Lighting</span>
+          </div>
+        </div>
+
+        <div class="rating-section">
+          <span class="rating-title">Rate Profile:</span>
+          <div class="rating-stars interactive-stars" id="stars-hemin-photo">
+            <span onclick="setRating('hemin-photo', 1)">★</span>
+            <span onclick="setRating('hemin-photo', 2)">★</span>
+            <span onclick="setRating('hemin-photo', 3)">★</span>
+            <span onclick="setRating('hemin-photo', 4)">★</span>
+            <span onclick="setRating('hemin-photo', 5)">★</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: TECHNICAL SUPPORT -->
+<div id="tech-page" class="page">
+  <div class="wrap">
+    <button class="back-btn" onclick="showPage('home-page')">← Back to Services</button>
+    <section class="hero">
+      <h1>Technical Support Team</h1>
+      <p>Connect directly with our technical team on WhatsApp.</p>
+    </section>
+
+    <div class="pro-grid" id="tech-grid">
+      <div class="pro-card add-profile-card" onclick="openModal('tech-grid', 'Technical Support')">
+        <div class="add-profile-content">
+          <div class="add-profile-icon">+</div>
+          <span>Add Profile (Tier Pricing)</span>
+        </div>
+      </div>
+
+      <div class="pro-card" data-person-id="shan-tech">
+        <div class="tier-badge badge-gold">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
+          Gold
+        </div>
+        <div class="pro-card-header">
+          <div class="pro-info">
+            <h3>ADMIN</h3>
+            <div class="place">📍 Taliparamba</div>
+            <div class="role">System & Software Specialist</div>
+            <div class="exp">1 Years Experience</div>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=919496806919&text=Hi%20Shan,%20I%20need%20Technical%20Support" class="wa-btn" target="_blank">Chat</a>
+        </div>
+
+        <div class="apps-section">
+          <div class="apps-section-title">Tools / Platforms</div>
+          <div class="pro-apps">
+            <span>Windows</span>
+          </div>
+        </div>
+
+        <div class="rating-section">
+          <span class="rating-title">Rate Profile:</span>
+          <div class="rating-stars interactive-stars" id="stars-shan-tech">
+            <span onclick="setRating('shan-tech', 1)">★</span>
+            <span onclick="setRating('shan-tech', 2)">★</span>
+            <span onclick="setRating('shan-tech', 3)">★</span>
+            <span onclick="setRating('shan-tech', 4)">★</span>
+            <span onclick="setRating('shan-tech', 5)">★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FORM -->
+<div id="profileModal" class="modal-overlay">
+  <div class="modal">
+    <h2>Add Your Profile</h2>
+    <div class="modal-subtitle">Select a badge plan and submit details. Your profile will be reviewed before going live.</div>
+    
+    <div class="form-group">
+      <label for="profTier">Select Badge Tier</label>
+      <select id="profTier" onchange="updateModalPrice()">
+        <option value="silver">Silver Tier (₹100+)</option>
+        <option value="gold">Gold Tier (₹300+)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="profName">Full Name</label>
+      <input type="text" id="profName" placeholder="e.g. Alex" required>
+    </div>
+    <div class="form-group">
+      <label for="profPlace">Place / Location</label>
+      <input type="text" id="profPlace" placeholder="e.g. Nellipramba" required>
+    </div>
+    <div class="form-group">
+      <label for="profRole">Professional Role</label>
+      <input type="text" id="profRole" placeholder="e.g. Video Editor" required>
+    </div>
+    <div class="form-group">
+      <label for="profApps">Apps / Software Used</label>
+      <input type="text" id="profApps" placeholder="e.g. CapCut, After Effects" required>
+    </div>
+    <div class="form-group">
+      <label for="profExp">Experience Level</label>
+      <input type="text" id="profExp" placeholder="e.g. 1 Year Experience">
+    </div>
+    <div class="form-group">
+      <label for="profPhone">WhatsApp Phone Number</label>
+      <input type="tel" id="profPhone" placeholder="e.g. 91 0000000000" required>
+    </div>
+    <div class="form-group">
+      <label for="profEmail">Your Email Address</label>
+      <input type="email" id="profEmail" placeholder="e.g. applicant@example.com" required>
+    </div>
+    
+    <div class="tier-rates-box">
+      <div class="tier-rates-title">Badge Pricing Rates:</div>
+      <div class="tier-rate-item" style="color: var(--gold-color);"><span>🥇 Gold Badge</span><span>₹300+</span></div>
+      <div class="tier-rate-item" style="color: var(--silver-color);"><span>🥈 Silver Badge</span><span>₹100+</span></div>
+    </div>
+
+    <div class="price-tag" id="dynamicPriceTag">
+      Listing Fee: ₹100+ (Silver Tier)
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-submit" id="submitModalBtn" onclick="submitProfileForApproval()">Submit for Approval</button>
+    </div>
+
+    <div class="modal-nav-row">
+      <button class="btn-nav" onclick="closeModal()">← Back</button>
+      <button class="btn-nav" onclick="goHomeFromModal()">🏠 Home</button>
+    </div>
+
+    <a href="https://api.whatsapp.com/send?phone=919496806919&text=Hi,%20I%20have%20a%20question%20about%20filling%20out%20my%20details." target="_blank" class="wa-chat-footer-btn">
+      💬 WhatsApp Chat Us
+    </a>
+  </div>
+</div>
+
+<footer>© 2026 Shanney.com. All rights reserved.  Just do it 1st and 2nd Rule of  You do not talk about Fight Club.</footer>
+
+<script>
+  let activeGridId = '';
+  let activeServiceType = '';
+  const adminWhatsApp = "919496806919";
+
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => {
+      page.classList.remove('active');
+    });
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function openModal(gridId, serviceType) {
+    activeGridId = gridId;
+    activeServiceType = serviceType;
+    document.getElementById('profileModal').classList.add('active');
+    updateModalPrice();
+  }
+
+  function closeModal() {
+    document.getElementById('profileModal').classList.remove('active');
+    document.getElementById('profName').value = '';
+    document.getElementById('profPlace').value = '';
+    document.getElementById('profRole').value = '';
+    document.getElementById('profApps').value = '';
+    document.getElementById('profExp').value = '';
+    document.getElementById('profPhone').value = '';
+    document.getElementById('profEmail').value = '';
+  }
+
+  function updateModalPrice() {
+    const tier = document.getElementById('profTier').value;
+    const priceTag = document.getElementById('dynamicPriceTag');
+    if (tier === 'gold') {
+      priceTag.innerText = 'Listing Fee: ₹300+ (Gold Tier)';
+      priceTag.style.borderColor = 'var(--gold-color)';
+      priceTag.style.color = 'var(--gold-color)';
+    } else {
+      priceTag.innerText = 'Listing Fee: ₹100+ (Silver Tier)';
+      priceTag.style.borderColor = 'var(--silver-color)';
+      priceTag.style.color = 'var(--silver-color)';
+    }
+  }
+
+  function goHomeFromModal() {
+    closeModal();
+    showPage('home-page');
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.innerText = text;
+    return div.innerHTML;
+  }
+
+  function setRating(personId, rating) {
+    const starsContainer = document.getElementById(`stars-${personId}`);
+    if (!starsContainer) return;
+
+    const stars = starsContainer.querySelectorAll('span');
+    stars.forEach((star, index) => {
+      if (index < rating) {
+        star.classList.add('active');
+      } else {
+        star.classList.remove('active');
+      }
+    });
+
+    localStorage.setItem(`user_star_${personId}`, rating);
+    alert(`Thank you for giving ${rating} Star(s)!`);
+  }
+
+  function loadSavedRatings() {
+    const personIds = ['shan-editor', 'hemin-editor', 'shan-tech', 'shan-photo', 'hemin-photo'];
+    personIds.forEach(id => {
+      const savedRating = localStorage.getItem(`user_star_${id}`);
+      if (savedRating) {
+        const starsContainer = document.getElementById(`stars-${id}`);
+        if (starsContainer) {
+          const stars = starsContainer.querySelectorAll('span');
+          stars.forEach((star, index) => {
+            if (index < parseInt(savedRating)) {
+              star.classList.add('active');
+            }
+          });
+        }
+      }
+    });
+  }
+
+  function getBadgeSvg(tier) {
+    if (tier === 'gold') {
+      return `<div class="tier-badge badge-gold"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>Gold</div>`;
+    } else {
+      return `<div class="tier-badge badge-silver"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>Silver</div>`;
+    }
+  }
+
+  function addProfileToGrid(name, place, role, apps, exp, phone, gridId, serviceType, tier = 'silver') {
+    const personId = 'user-' + Date.now();
+    const encodedMsg = encodeURIComponent(`Hi ${name}, I need ${serviceType}`);
+    const waUrl = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodedMsg}`;
+
+    const appsList = apps.split(',').map(app => `<span>${escapeHtml(app.trim())}</span>`).join('');
+    const badgeHtml = getBadgeSvg(tier);
+
+    const newCard = document.createElement('div');
+    newCard.className = `pro-card`;
+    newCard.setAttribute('data-person-id', personId);
+    newCard.innerHTML = `
+      ${badgeHtml}
+      <div class="pro-card-header">
+        <div class="pro-info">
+          <h3>${escapeHtml(name)}</h3>
+          <div class="place">📍 ${escapeHtml(place)}</div>
+          <div class="role">${escapeHtml(role)}</div>
+          <div class="exp">${escapeHtml(exp)}</div>
+        </div>
+        <a href="${waUrl}" class="wa-btn" target="_blank">Chat</a>
+      </div>
+      <div class="apps-section">
+        <div class="apps-section-title">Software / Apps</div>
+        <div class="pro-apps">${appsList}</div>
+      </div>
+      <div class="rating-section">
+        <span class="rating-title">Rate Profile:</span>
+        <div class="rating-stars interactive-stars" id="stars-${personId}">
+          <span onclick="setRating('${personId}', 1)">★</span>
+          <span onclick="setRating('${personId}', 2)">★</span>
+          <span onclick="setRating('${personId}', 3)">★</span>
+          <span onclick="setRating('${personId}', 4)">★</span>
+          <span onclick="setRating('${personId}', 5)">★</span>
+        </div>
+      </div>
+    `;
+    const targetGrid = document.getElementById(gridId);
+    if (targetGrid) {
+      targetGrid.appendChild(newCard);
+    }
+  }
+
+  function submitProfileForApproval() {
+    const tier = document.getElementById('profTier').value;
+    const name = document.getElementById('profName').value.trim();
+    const place = document.getElementById('profPlace').value.trim();
+    const role = document.getElementById('profRole').value.trim();
+    const apps = document.getElementById('profApps').value.trim() || 'Editing Apps';
+    const exp = document.getElementById('profExp').value.trim() || '1 Year Experience';
+    const phone = document.getElementById('profPhone').value.trim();
+    const applicantEmail = document.getElementById('profEmail').value.trim();
+
+    let feeText = '₹100+';
+    if (tier === 'gold') feeText = '₹300+';
+
+    if (!name || !place || !role || !phone || !applicantEmail) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    const waText = encodeURIComponent(
+      `*NEW PROFILE APPLICATION (Shanney.com)*\n\n` +
+      `*Selected Badge Tier:* ${tier.toUpperCase()}\n` +
+      `*Name:* ${name}\n` +
+      `*Location:* ${place}\n` +
+      `*Role:* ${role}\n` +
+      `*Apps/Software:* ${apps}\n` +
+      `*Experience:* ${exp}\n` +
+      `*Category:* ${activeServiceType}\n` +
+      `*Phone:* ${phone}\n` +
+      `*Email:* ${applicantEmail}\n` +
+      `*Fee Plan:* ${feeText}\n\n` +
+      `*Decision:* Approve or Reject profile listing.`
+    );
+    const adminWaUrl = `https://api.whatsapp.com/send?phone=${adminWhatsApp}&text=${waText}`;
+
+    alert("Thank you! Your profile submission and tier details are being sent to administration.");
+    closeModal();
+    window.open(adminWaUrl, '_blank');
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    loadSavedRatings();
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('accept') === 'true') {
+      const name = params.get('name');
+      const place = params.get('place') || 'Kerala';
+      const role = params.get('role');
+      const apps = params.get('apps') || 'CapCut, Lightroom';
+      const exp = params.get('exp') || '1 Year Experience';
+      const phone = params.get('phone');
+      const tier = params.get('tier') || 'silver';
+      const grid = params.get('grid') || 'editors-grid';
+      const service = params.get('service') || 'Editing';
+
+      if (name && role && phone) {
+        addProfileToGrid(name, place, role, apps, exp, phone, grid, service, tier);
+        alert(`Profile for ${name} (${tier.toUpperCase()} Tier) has been published!`);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
