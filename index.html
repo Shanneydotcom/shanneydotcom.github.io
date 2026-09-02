@@ -89,7 +89,7 @@
   }
 
   function loadSavedRatings() {
-    const personIds = ['shan-editor', 'hemin-editor', 'shan-tech', 'shan-photo', 'hemin-photo'];
+    const personIds = ['shan-editor', 'sinan-editor', 'hemin-editor', 'shan-tech', 'shan-photo', 'hemin-photo'];
     personIds.forEach(id => {
       const savedRating = localStorage.getItem(`user_star_${id}`);
       if (savedRating) {
@@ -202,7 +202,6 @@
   // DYNAMIC ADDITIONS (PARTICLES, STAR HOVER & SCROLL ENHANCEMENTS)
   // =========================================================================
 
-  // FEATURE 1: Interactive Canvas Particle Background
   function initParticleCanvas() {
     const canvas = document.createElement('canvas');
     canvas.id = 'bg-canvas';
@@ -246,7 +245,6 @@
     drawParticles();
   }
 
-  // FEATURE 2: Interactive Star Rating Preview
   function initHoverStars(container = document) {
     const starGroups = container.querySelectorAll('.interactive-stars');
     starGroups.forEach(group => {
@@ -264,7 +262,6 @@
     });
   }
 
-  // FEATURE 3: Dynamic Scroll Progress Bar & Scroll-To-Top Button
   function initScrollEnhancements() {
     const progressBar = document.createElement('div');
     progressBar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:var(--brass);z-index:1001;width:0%;transition:width 0.1s;';
@@ -272,7 +269,7 @@
 
     const scrollTopBtn = document.createElement('button');
     scrollTopBtn.innerHTML = '↑';
-    scrollTopBtn.style.cssText = 'position:fixed;bottom:20px;right:20px;width:40px;height:40px;border-radius:50%;background:var(--brass);color:#0B132B;border:none;font-weight:bold;cursor:pointer;display:none;z-index:999;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+    scrollTopBtn.style.cssText = 'position:fixed;bottom:80px;right:25px;width:52px;height:52px;font-size:1.4rem;border-radius:50%;background:var(--brass);color:#0B132B;border:none;font-weight:bold;cursor:pointer;display:none;z-index:999;box-shadow:0 6px 16px rgba(0,0,0,0.4);transition:transform 0.2s ease;';
     document.body.appendChild(scrollTopBtn);
 
     scrollTopBtn.addEventListener('click', () => {
@@ -288,7 +285,58 @@
     });
   }
 
-  // Initialization lifecycle
+  // LOGO FALLING ANIMATION SYSTEM
+  function initFallingLogosAnimation() {
+    const logoContainer = document.createElement('div');
+    logoContainer.id = 'falling-logos-container';
+    document.body.appendChild(logoContainer);
+
+    const logoSources = [
+      'https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg',
+      'https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg',
+      'https://content.instructables.com/FSR/A8AV/M1P0STOP/FSRA8AVM1P0STOP.png',
+      'https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg'
+    ];
+
+    function createFallingLogo(src, index) {
+      setTimeout(() => {
+        const logo = document.createElement('img');
+        logo.src = src;
+        logo.className = 'falling-logo';
+        
+        const randomX = 5 + Math.random() * 85; 
+        const duration = 7 + Math.random() * 5; 
+        const rotation = (Math.random() - 0.5) * 720; 
+        const size = 38 + Math.random() * 20; 
+
+        logo.style.left = `${randomX}vw`;
+        logo.style.width = `${size}px`;
+        logo.style.height = `${size}px`;
+        logo.style.animation = `gravityFall ${duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
+        logo.style.setProperty('--spin-deg', `${rotation}deg`);
+
+        logoContainer.appendChild(logo);
+
+        setTimeout(() => {
+          logo.classList.add('disappear');
+          setTimeout(() => logo.remove(), 800);
+        }, (duration - 0.5) * 1000);
+      }, index * 1500);
+    }
+
+    function triggerLogoRainSequence() {
+      logoSources.forEach((src, idx) => {
+        createFallingLogo(src, idx);
+      });
+    }
+
+    // Initial Trigger on site load
+    triggerLogoRainSequence();
+
+    // Loop trigger every 2 minutes (120000ms)
+    setInterval(triggerLogoRainSequence, 120000);
+  }
+
   window.addEventListener('DOMContentLoaded', () => {
     loadSavedRatings();
     updateCategoryCounts();
@@ -296,6 +344,7 @@
     initParticleCanvas();
     initHoverStars();
     initScrollEnhancements();
+    initFallingLogosAnimation();
 
     const params = new URLSearchParams(window.location.search);
     if (params.get('accept') === 'true') {
@@ -323,7 +372,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-<!-- SEO Meta Tags -->
 <meta name="description" content="Professional photo & video editing, photography, videography, and technical support services by Muhammed Shan MK. Serving Kerala, Kannur, Taliparamba, Nelliparamba, and surrounding areas for busy professionals and businesses.">
 <meta name="keywords" content="
   Muhammed Shan MK,
@@ -345,7 +393,6 @@
 <meta name="author" content="Muhammed Shan MK">
 <meta name="robots" content="index, follow">
 
-<!-- Open Graph / Social Media Meta Tags -->
 <meta property="og:title" content="Muhammed Shan MK | Professional Editing, Media & Tech Support in Kerala">
 <meta property="og:description" content="Hire expert photo/video editors, photographers, videographers, and tech support in Kannur, Taliparamba, and Nelliparamba. Direct solutions for busy individuals and teams.">
 <meta property="og:type" content="website">
@@ -575,14 +622,15 @@
     gap: 8px;
   }
 
+  /* SMALLER CATEGORY COUNT BADGE */
   .profile-count-badge {
-    font-size: 0.72rem;
+    font-size: 0.62rem;
     font-weight: 600;
     color: var(--brass);
     background: rgba(56, 189, 248, 0.12);
     border: 1px solid rgba(56, 189, 248, 0.3);
-    padding: 3px 8px;
-    border-radius: 12px;
+    padding: 2px 6px;
+    border-radius: 10px;
     white-space: nowrap;
   }
 
@@ -953,7 +1001,6 @@
     text-transform: uppercase;
   }
 
-  /* DIRECT 5 STAR RATING ONLY */
   .rating-section {
     border-top: 1px dashed var(--line);
     padding-top: 8px;
@@ -1173,6 +1220,40 @@
     margin-top: 32px;
   }
 
+  /* FALLING LOGOS ANIMATION STYLES */
+  #falling-logos-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .falling-logo {
+    position: absolute;
+    top: -60px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    opacity: 0.85;
+    transition: opacity 0.8s ease;
+  }
+
+  .falling-logo.disappear {
+    opacity: 0;
+  }
+
+  @keyframes gravityFall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(calc(100vh - 40px)) rotate(var(--spin-deg, 360deg));
+    }
+  }
+
   @media(min-width: 640px) {
     .grid, .pro-grid {
       display: grid;
@@ -1225,7 +1306,7 @@
               <h3>Editors</h3>
             </div>
             <div class="card-slot">
-              <span class="profile-count-badge" id="editors-count-badge">2 out of 10</span>
+              <span class="profile-count-badge" id="editors-count-badge">3 out of 10</span>
               <div class="go-inside-btn">
                 <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
@@ -1353,6 +1434,41 @@
             <span onclick="setRating('shan-editor', 3)">★</span>
             <span onclick="setRating('shan-editor', 4)">★</span>
             <span onclick="setRating('shan-editor', 5)">★</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SINAN PROFILE -->
+      <div class="pro-card" data-person-id="sinan-editor">
+        <div class="tier-badge badge-gold">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
+          Gold
+        </div>
+        <div class="pro-card-header">
+          <div class="pro-info">
+            <h3>Sinan</h3>
+            <div class="place">📍 Kannur</div>
+            <div class="role">Video Editor</div>
+            <div class="exp">2 Years Experience</div>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=919496806919&text=Hi%20Sinan,%20I%20want%20to%20hire%20you%20for%20Video%20Editing" class="wa-btn" target="_blank">Chat</a>
+        </div>
+        
+        <div class="apps-section">
+          <div class="apps-section-title">Software / Apps</div>
+          <div class="pro-apps">
+            <span>CapCut</span>
+          </div>
+        </div>
+
+        <div class="rating-section">
+          <span class="rating-title">Rate Profile:</span>
+          <div class="rating-stars interactive-stars" id="stars-sinan-editor">
+            <span onclick="setRating('sinan-editor', 1)">★</span>
+            <span onclick="setRating('sinan-editor', 2)">★</span>
+            <span onclick="setRating('sinan-editor', 3)">★</span>
+            <span onclick="setRating('sinan-editor', 4)">★</span>
+            <span onclick="setRating('sinan-editor', 5)">★</span>
           </div>
         </div>
       </div>
