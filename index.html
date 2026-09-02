@@ -426,6 +426,7 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
@@ -436,6 +437,7 @@
     line-height: 1.5;
     padding-bottom: 70px;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   h1, h2, h3 {
@@ -608,18 +610,21 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
+    gap: 8px;
   }
 
   .card-header-left {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
   }
 
   .card-slot {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
   }
 
   /* SMALLER CATEGORY COUNT BADGE */
@@ -654,10 +659,14 @@
     stroke-width: 2;
   }
 
+  /* PHOTOGRAPHY & VIDEOGRAPHY HEADER RESPONSIVE FIX */
   .card h3 {
-    font-size: 1rem;
+    font-size: clamp(0.82rem, 3.8vw, 1rem);
     font-weight: 600;
     color: #ffffff;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    word-break: break-word;
   }
 
   .go-inside-btn {
@@ -669,6 +678,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+    flex-shrink: 0;
   }
 
   .go-inside-btn svg {
@@ -1323,7 +1333,7 @@
               <div class="icon">
                 <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
               </div>
-              <h3>Photography/Videography</h3>
+              <h3>Photo/Videography</h3>
             </div>
             <div class="card-slot">
               <span class="profile-count-badge" id="photo-count-badge">2 out of 10</span>
@@ -1392,7 +1402,7 @@
   <div class="wrap">
     <button class="back-btn" onclick="showPage('home-page')">← Back to Services</button>
     <section class="hero">
-      <h1>Editors Team</h1>
+      <h1>Editor Profiles</h1>
       <p>Connect directly with our professional editors on WhatsApp.</p>
     </section>
 
@@ -1517,7 +1527,7 @@
   <div class="wrap">
     <button class="back-btn" onclick="showPage('home-page')">← Back to Services</button>
     <section class="hero">
-      <h1>Photography & Videography Team</h1>
+      <h1>Photo/Videography Profiles</h1>
       <p>Connect directly with our professional photographers & videographers on WhatsApp.</p>
     </section>
 
@@ -1607,7 +1617,7 @@
   <div class="wrap">
     <button class="back-btn" onclick="showPage('home-page')">← Back to Services</button>
     <section class="hero">
-      <h1>Technical Support Team</h1>
+      <h1>Technical Support Profiles</h1>
       <p>Connect directly with our technical team on WhatsApp.</p>
     </section>
 
